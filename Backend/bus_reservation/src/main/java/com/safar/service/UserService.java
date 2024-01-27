@@ -12,6 +12,6 @@ public interface UserService {
     public User deleteUser(Integer userId, String key) throws UserException, AdminException;
     public User viewUserById(Integer userId, String key) throws UserException, AdminException;
     public List<User> viewAllUser(String key) throws UserException, AdminException;
-    public void backupUsersToFile(String filePath) throws UserException, AdminException;
+    public void backupUsersToFile(String filePath, String key) throws UserException, AdminException;
     public void restoreUsersFromFile(String filePath) throws UserException, AdminException;
     }
