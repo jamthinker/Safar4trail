@@ -14,4 +14,4 @@ public interface UserService {
     public List<User> viewAllUser(String key) throws UserException, AdminException;
     public void backupUsersToFile(String filePath, String key) throws UserException, AdminException;
     public void restoreUsersFromFile(String filePath) throws UserException, AdminException;
-    }
+}  
