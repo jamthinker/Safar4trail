@@ -65,4 +65,34 @@ public class UserServiceImpl implements UserService{
         if(list.isEmpty())  throw new UserException("No users found!");
         return list;
     }
+     public void backupUsersToFile(String filePath, String key) throws UserException, AdminException {
+        CurrentAdminSession loggedInAdmin = adminSession.findByaid(key);
+        if(loggedInAdmin == null)  throw new AdminException("Please enter a valid key or login first!");
+        List<User> list = userRepository.findAll();
+        if(list.isEmpty())  throw new UserException("No users found!");
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            for(User user : list) {
+                fileWriter.write(user.toString());
+                fileWriter.write("\n");
+            }
+            fileWriter.close();
+            //print file to console
+            FileReader fileReader = new FileReader(filePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+            bufferedReader.close();
+            }
+            catch (fileNotFoundException e) {
+                throw new UserException("unable to locate file!");
+            }
+            catch (IOException e) {
+                throw new UserException("Unable to backup users to file!");
+            }         
+        }
+
+    
 }
